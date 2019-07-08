@@ -1,0 +1,17 @@
+<h1>Your Playlist Details</h1>
+
+
+<h3>Name: <%= @playlist.name %> </h3>
+
+
+<h3>List of your songs:</h3>
+
+<ul>
+  <% @playsongs.each do |playsong| %>
+    <li>
+      <%= link_to "Title: #{playsong.song.name}", song_path(playsong.song) %> <br>
+      <%= "Album: #{playsong.song.album}" %> <br>
+      <%= "Genre: #{playsong.song.genre}" %>
+    </li>
+  <% end %>
+</ul>
