@@ -9,12 +9,12 @@ class PlaylistsController < ApplicationController
   end
 
   def new
-    @player = Player.new
+    @playlist = Playlist.new
   end
 
   def create
-    player = Player.create(player_params)
-    redirect_to players_path
+    playlist = Playlist.create(playlist_params)
+    redirect_to playlist_path
   end 
 
   def edit
