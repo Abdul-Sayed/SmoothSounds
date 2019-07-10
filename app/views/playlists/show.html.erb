@@ -16,6 +16,9 @@
   <% end %>
 </ul>
 
+
 <%= button_to 'Remove', @playlist, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <%= button_to 'Edit', edit_playlist_path(@playlist), method: 'get'%>
+
+

@@ -6,6 +6,7 @@ class PlaylistsController < ApplicationController
   def show
     find_playlist
     @playsongs = @playlist.playsongs
+    
   end
 
   def new
@@ -13,8 +14,8 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    playlist = Playlist.create(playlist_params)
-    redirect_to playlist_path
+    @playlist = Playlist.create(playlist_params)
+    redirect_to playlist_path(@playlist)
   end 
 
   def edit
