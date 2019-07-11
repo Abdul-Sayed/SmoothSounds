@@ -11,11 +11,17 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.create(song_params)
-    @playlist = Playlist.find(params[:song][:playlist_id])
 
-    @playsong = Playsong.create(playlist_id: @playlist.id, song_id: @song.id)
-    # redirect_to song_path(@song)
-    redirect_to playlist_path(@playlist)
+    if @song.valid?
+      @playlist = Playlist.find(params[:song][:playlist_id])
+
+      @playsong = Playsong.create(playlist_id: @playlist.id, song_id: @song.id)
+      # redirect_to song_path(@song)
+      redirect_to playlist_path(@playlist)
+    else
+      flash[:errors] = @song.errors.full_messages
+      redirect_to new_song_path
+    end
   end
 
   def show
@@ -30,7 +36,13 @@ class SongsController < ApplicationController
   def update
     find_song
     @song.update(song_params)
-    redirect_to song_path(@song)
+
+    if @song.update(song_params)
+      redirect_to song_path(@song)
+    else
+      flash[:errors] = @song.errors.full_messages
+      redirect_to edit_song_path(@song)
+    end
   end
 
   def destroy

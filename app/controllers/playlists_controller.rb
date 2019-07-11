@@ -18,9 +18,15 @@ class PlaylistsController < ApplicationController
   def create
     # Playlist instances must be created with a user_id
     @playlist = Playlist.create(playlist_params)
-    @user = User.find(session[:user_id])
-    @user.playlists << @playlist
-    redirect_to playlist_path(@playlist)
+
+    if @playlist.valid?
+      @user = User.find(session[:user_id])
+      @user.playlists << @playlist
+      redirect_to playlist_path(@playlist)
+    else
+      flash[:errors] = @playlist.errors.full_messages
+      redirect_to new_playlist_path
+    end
   end
 
   def edit
@@ -30,7 +36,13 @@ class PlaylistsController < ApplicationController
   def update
     find_playlist
     @playlist.update(playlist_params)
-    redirect_to playlist_path(@playlist)
+
+    if @playlist.update(playlist_params)
+      redirect_to playlist_path(@playlist)
+    else
+      flash[:errors] = @playlist.errors.full_messages
+      redirect_to edit_playlist_path(@playlist)
+    end
   end
 
   def destroy

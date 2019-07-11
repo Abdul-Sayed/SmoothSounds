@@ -1,10 +1,12 @@
 require "net/http"
 require "open-uri"
-
 require "json"
 
 class Song < ApplicationRecord
   has_many :playsongs
+
+  validates :name, presence: true
+  validates :album, presence: true
 
   def self.get_api_data(title, artist)
     @song_name = title.split(" ").join("_")
@@ -26,6 +28,7 @@ class Song < ApplicationRecord
   end
 end
 
+# More Goodies from Deezer API
 # @correct_title = @hash["data"][0]["title"]
 # @correct_artist_name = @hash["data"][0]["artist"]["name"]
 # @artist_picture = @hash["data"][0]["artist"]["picture_big"]

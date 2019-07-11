@@ -12,6 +12,7 @@
 <ul>
   <% @playsongs.each do |playsong| %>
     <li>
+      <img src="<%= Song.artist_picture(playsong.song.name, playsong.song.album) %>" alt="Artist Photo" height="100" width="100"> <br>
       <%= link_to "Title: #{playsong.song.name}", song_path(playsong.song) %> <br>
       <%= "Artist: #{playsong.song.album}" %> <br>
       <%= "Genre: #{playsong.song.genre}" %> <br>    

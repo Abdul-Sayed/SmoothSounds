@@ -1,7 +1,12 @@
-
-
-
-
+<% if flash[:errors] %>
+  <ul>
+    <% flash[:errors].each do |error_message| %>
+      <li>
+        <%= error_message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_for @playlist do |f| %>
     <%= f.label :name %>:
