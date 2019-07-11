@@ -6,7 +6,9 @@ class PlaylistsController < ApplicationController
   def show
     find_playlist
     @playsongs = @playlist.playsongs
-    
+
+    @song = Song.new
+    # Song.play_song(title, artist)
   end
 
   def new
@@ -14,13 +16,14 @@ class PlaylistsController < ApplicationController
   end
 
   def create
+    # Playlist instances must be created with a user_id
     @playlist = Playlist.create(playlist_params)
     redirect_to playlist_path(@playlist)
-  end 
+  end
 
   def edit
     find_playlist
-  end 
+  end
 
   def update
     find_playlist
@@ -29,7 +32,7 @@ class PlaylistsController < ApplicationController
   end
 
   def destroy
-    find_playlist    
+    find_playlist
     @playlist.destroy
     redirect_to playlists_path
   end
@@ -41,6 +44,6 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_params
-    params.require(:playlist).permit(:name)
-  end 
+    params.require(:playlist).permit(:name, :user_id)
+  end
 end

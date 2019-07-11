@@ -4,7 +4,8 @@ class PlaysongsController < ApplicationController
     end
 
     def create
-        # take in playlist_id; @playlist.id and song_id; params[]
+        # take in playlist.id and song_id from params[]
         # create new playsong with that
+        
     end
 end
