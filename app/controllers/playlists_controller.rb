@@ -1,4 +1,5 @@
 class PlaylistsController < ApplicationController
+  
   def index
     @playlists = Playlist.all
   end
@@ -6,7 +7,6 @@ class PlaylistsController < ApplicationController
   def show
     find_playlist
     @playsongs = @playlist.playsongs
-    
   end
 
   def new
@@ -15,6 +15,8 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.create(playlist_params)
+    @user = User.find(session[:user_id])
+    @user.playlists << @playlist
     redirect_to playlist_path(@playlist)
   end 
 

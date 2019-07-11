@@ -9,7 +9,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create
-    redirect_to user_path
+    @user = User.create(user_params)
+    session[:user_id] = @user.id
+    redirect_to playlists_path
   end 
+end
+
+private
+
+def user_params
+  params.require(:user).permit(:name, :password)
 end
