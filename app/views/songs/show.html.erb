@@ -1,2 +1,16 @@
-<h1>Songs#show</h1>
-<p>Find me in app/views/songs/show.html.erb</p>
+<h5><%= link_to 'Return to Songs List', songs_path %></h5>
+
+
+<h1>Song Details</h1>
+<img src="<%= Song.artist_picture(@song.name, @song.album) %>" alt="Artist Photo" height="300" width="300">
+
+
+<h2><%= "Song: #{@song.name}" %></h2>
+<h4><%= "Artist: #{@song.album}" %></h4>
+<h4><%= "Genre: #{@song.genre}" %></h4>
+
+
+
+<a href=<%=Song.play_song(@song.name, @song.album)%> target="_blank">Play Song</a>
+
+<h3><%= link_to 'Edit Song', edit_song_path(@song) %></h3>

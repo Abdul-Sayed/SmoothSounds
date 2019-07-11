@@ -1,3 +1,6 @@
+<h5><%= link_to 'Return to list of playlists', playlists_path %></h5>
+
+
 <h1>Your Playlist Details</h1>
 
 
@@ -10,8 +13,29 @@
   <% @playsongs.each do |playsong| %>
     <li>
       <%= link_to "Title: #{playsong.song.name}", song_path(playsong.song) %> <br>
-      <%= "Album: #{playsong.song.album}" %> <br>
-      <%= "Genre: #{playsong.song.genre}" %>
+      <%= "Artist: #{playsong.song.album}" %> <br>
+      <%= "Genre: #{playsong.song.genre}" %> <br>    
+      <a href=<%=Song.play_song(playsong.song.name, playsong.song.album)%> target="_blank">Play Song</a>
     </li>
   <% end %>
 </ul>
+
+<%= button_to 'Edit Playlist', edit_playlist_path(@playlist), method: 'get'%>
+
+<br><br>
+
+<%= button_to 'Delete Playlist', playlist_path(@playlist), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+<h3>Add song to playlist</h3>
+
+<%= form_for @song do |form| %>
+  <%= form.hidden_field :playlist_id , :value => @playlist.id %>
+  <%= form.text_field :name, placeholder: 'song name' %>
+  <%= form.text_field :album, placeholder: 'song artist' %>
+  <%= form.text_field :genre, placeholder: 'song genre' %>
+  <%= form.submit %>
+<% end %>
+
+
+

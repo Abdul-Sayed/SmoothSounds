@@ -1,4 +1,7 @@
-<h1>All of your Smooth Playlists</h1>
+<%= button_to "Create a New Playlist", new_playlist_path, method: :get %>
+
+
+<h1>All of Your Smooth Playlists</h1>
 
 <ul>
   <% @playlists.each do |playlist| %>
