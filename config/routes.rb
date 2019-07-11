@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   # may need to remove :playsong
   resources :playsongs
   resources :songs
+  resources :auth
 end

@@ -18,6 +18,8 @@ class PlaylistsController < ApplicationController
   def create
     # Playlist instances must be created with a user_id
     @playlist = Playlist.create(playlist_params)
+    @user = User.find(session[:user_id])
+    @user.playlists << @playlist
     redirect_to playlist_path(@playlist)
   end
 
