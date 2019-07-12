@@ -1,3 +1,5 @@
+
+<div class="auth_home">
 <h1>Log In</h1>
 <%= form_tag "/auth" do %>
   <%= text_field_tag :name %>
@@ -6,4 +8,7 @@
 <% end %>
 
 <%= button_to 'Create New Profile', new_user_path, method: 'get'%>
+</div>
+
+
 
