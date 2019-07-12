@@ -19,14 +19,18 @@ class PlaylistsController < ApplicationController
     # Playlist instances must be created with a user_id
     @playlist = Playlist.create(playlist_params)
 
-    if @playlist.valid?
-      @user = User.find(session[:user_id])
-      @user.playlists << @playlist
-      redirect_to playlist_path(@playlist)
-    else
-      flash[:errors] = @playlist.errors.full_messages
-      redirect_to new_playlist_path
-    end
+    @user = User.find(session[:user_id])
+    @user.playlists << @playlist
+    redirect_to playlist_path(@playlist)
+
+    # if @playlist.valid?
+    #   @user = User.find(session[:user_id])
+    #   @user.playlists << @playlist
+    #   redirect_to playlist_path(@playlist)
+    # else
+    #   flash[:errors] = @playlist.errors.full_messages
+    #   redirect_to new_playlist_path
+    # end
   end
 
   def edit

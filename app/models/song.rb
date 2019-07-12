@@ -19,12 +19,22 @@ class Song < ApplicationRecord
 
   def self.play_song(title, artist)
     self.get_api_data(title, artist)
-    return @song_preview = @hash["data"][0]["preview"]
+
+    begin
+      return @song_preview = @hash["data"][0]["preview"]
+    rescue
+      return
+    end
   end
 
   def self.artist_picture(title, artist)
     self.get_api_data(title, artist)
-    return @artist_picture = @hash["data"][0]["artist"]["picture_big"]
+
+    begin
+      return @artist_picture = @hash["data"][0]["artist"]["picture_big"]
+    rescue
+      return
+    end
   end
 end
 
